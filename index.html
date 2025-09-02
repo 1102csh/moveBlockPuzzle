@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stage-selector expanded" id="stageSelector">
+        <button id="toggleStageBtn">▼</button>
+        <div class="stage-buttons" id="stageButtons"></div>
+    </div>
+
+    <div id="utilWrap">
+        <div class="score">이동한 횟수 :&nbsp;<div id="score">0</div>
+        </div>
+        <img id="help" src="./assets/help.png" />
+    </div>
+
+    <div id="gameContainer">
+        <canvas id="canvas" width="360" height="480"></canvas>
+        <div id="resetWrap"><img id="resetBtn" src="./assets/refresh.png"/></div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2>플레이 방법</h2>
+            <p>블럭을 클릭하고 방향키로 이동하세요.<br>파란색 블럭이 가장 아래 연두색에 도달하면 성공입니다!</p>
+        </div>
+    </div>
+
+    <div id="controls" class="mobile-controls">
+        <button onclick="move('up')">↑</button>
+        <div class="controlsHori">
+            <button onclick="move('left')">←</button>
+            <button onclick="move('right')">→</button>
+        </div>
+        <button onclick="move('down')">↓</button>
+    </div>
+
+    <script src="./js/code.js"></script>
+    <script>
+        const helpBtn = document.getElementById('help');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModalBtn = document.querySelector('.modal-close');
+
+        helpBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('hidden');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('hidden');
+        });
+
+        // 바깥 영역 클릭 시 닫기
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
